@@ -1,0 +1,25 @@
+From b55a6de5ce4c3e06530fec9f3c794f8298a04c06 Mon Sep 17 00:00:00 2001
+From: Jordan OMara <jomara@redhat.com>
+Date: Thu, 10 Apr 2014 16:37:21 -0400
+Subject: [PATCH] Fixing manifest.in
+
+Change-Id: I9b3e2a015651c8a1ee5b7c08121f66bd70328d9f
+---
+ MANIFEST.in | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/MANIFEST.in b/MANIFEST.in
+index 87b5b4f..eab1b8a 100644
+--- a/MANIFEST.in
++++ b/MANIFEST.in
+@@ -3,6 +3,7 @@ recursive-include doc *.py *.rst *.css *.js *.html *.conf *.jpg *.gif *.png *.cs
+ recursive-include horizon *.html *.css *.js *.csv *.template *.tmpl *.mo *.po
+ recursive-include openstack_dashboard *.html *.js *.less *.mo *.po *.example *.eot *.svg *.ttf *.woff *.png *.ico *.wsgi *.gif *.csv *.template
+ recursive-include tools *.py *.sh
++recursive-include tuskar_ui *.py *html
+ 
+ include AUTHORS
+ include ChangeLog
+-- 
+1.8.1.4
+
