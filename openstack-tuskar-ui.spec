@@ -1,6 +1,6 @@
 Name:	      openstack-tuskar-ui
 Version:	  0.1.0
-Release:	  10%{?dist}
+Release:	  11%{?dist}
 Summary:	  The UI component for Tuskar
 
 Group:		  Applications/System
@@ -9,6 +9,8 @@ URL:		    https://github.com/openstack/tuskar-ui
 Source0:	  https://pypi.python.org/packages/source/t/tuskar-ui/tuskar-ui-%{version}.tar.gz
 
 Patch0:     0001-Fixing-manifest.in.patch
+Patch1:     0003-Init-code-for-Instack-Undercloud.patch
+Patch2:     0004-Adding-missing-setup-for-instack.patch
 
 BuildArch:     noarch
 
@@ -67,6 +69,8 @@ deployments. It is a plugin for OpenStack Horizon.
 %prep
 %setup -q -n tuskar-ui-%{version}
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 rm -rf tuskar_ui.egg-info/
 
 # Remove the requirements file so that pbr hooks don't add it
@@ -117,6 +121,9 @@ export PYTHONPATH=$PYTHONPATH:%{_datadir}/openstack-dashboard
 %endif
 
 %changelog
+* Wed Apr 30 2014 Jordan OMara <jomara@redhat.com> - 0.1.0-11
+- Upstream instack comment patches
+
 * Wed Apr 09 2014 Jordan OMara <jomara@redhat.com> - 0.1.0-10
 - Explicit *.html callout
 

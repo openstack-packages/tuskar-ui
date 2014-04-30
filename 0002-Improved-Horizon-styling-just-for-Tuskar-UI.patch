@@ -1,0 +1,408 @@
+From e3f2ee273de40e64449081b2cccbb4c5ed763864 Mon Sep 17 00:00:00 2001
+From: Jaromir Coufal <jcoufal@redhat.com>
+Date: Mon, 7 Apr 2014 16:46:31 +0200
+Subject: [PATCH 1/3] Improved Horizon styling (just for Tuskar UI)
+
+- topbar styling
+- nav styling
+- detail pages header
+- headings
+- tuskar forms improvements
+
+Change-Id: I53809ee95c5311d3ed747c52b15fce77d3784af6
+Fixing-bug: #1302013
+---
+ .../nodes/templates/nodes/_nodes_formset_form.html |   8 +-
+ .../templates/overcloud/_detail_overview.html      |   2 +-
+ .../infrastructure/less/horizon_upgrades.less      | 223 +++++++++++++++++++++
+ .../infrastructure/less/individual_pages.less      |  15 +-
+ .../static/infrastructure/less/infrastructure.less |   8 +-
+ .../templates/formset_table/menu_formset.html      |   2 +-
+ .../infrastructure/_fullscreen_workflow.html       |   2 +-
+ 7 files changed, 246 insertions(+), 14 deletions(-)
+ create mode 100644 tuskar_ui/infrastructure/static/infrastructure/less/horizon_upgrades.less
+
+diff --git a/tuskar_ui/infrastructure/nodes/templates/nodes/_nodes_formset_form.html b/tuskar_ui/infrastructure/nodes/templates/nodes/_nodes_formset_form.html
+index 090fcc7..32ae201 100644
+--- a/tuskar_ui/infrastructure/nodes/templates/nodes/_nodes_formset_form.html
++++ b/tuskar_ui/infrastructure/nodes/templates/nodes/_nodes_formset_form.html
+@@ -2,22 +2,22 @@
+      id="tab-{{ form.prefix }}">
+   <div class="form form-inline">
+     <div class="row-fluid">
+-      <h3 style="margin-bottom:16px">Node Detail</h3>
++      <h4>Node Detail</h4>
+       {% include 'infrastructure/nodes/_nodes_formset_field.html' with field=form.node_tags %}
+     </div>
+     <div class="row-fluid">
+-      <h4>Power Management</h4>
++      <h5>Power Management</h5>
+       {% include 'infrastructure/nodes/_nodes_formset_field.html' with field=form.ipmi_address %}
+       {% include 'infrastructure/nodes/_nodes_formset_field.html' with field=form.ipmi_user %}
+       {% include 'infrastructure/nodes/_nodes_formset_field.html' with field=form.ipmi_password %}
+     </div>
+     <div class="row-fluid">
+-      <h4>Networking</h4>
++      <h5>Networking</h5>
+       {% include 'infrastructure/nodes/_nodes_formset_field.html' with field=form.mac_address required=True %}
+     </div>
+     <div class="row-fluid">
+       <div class="span4">
+-        <h4>Hardware</h4>
++        <h5>Hardware</h5>
+       </div>
+       <label class="span6 checkbox checkbox-inline">
+         {{ form.introspect_hardware }}<small> {{ form.introspect_hardware.label }}</small>
+diff --git a/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html b/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html
+index 03c7c43..b9f247f 100644
+--- a/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html
++++ b/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html
+@@ -174,7 +174,7 @@
+   <div class="span4">
+     <div class="widget">
+       <h2>{% trans "Deployment Role Distribution" %}</h2>
+-      <div class="d3_pie_chart_distribution pull-left" data-used='{% for role in roles %}{{ role.name }}={{ role.deployed_node_count|default:"0" }}{% if not forloop.last %}|{% endif %}{% endfor %}'></div>
++      <div class="d3_pie_chart_distribution" data-used='{% for role in roles %}{{ role.name }}={{ role.deployed_node_count|default:"0" }}{% if not forloop.last %}|{% endif %}{% endfor %}'></div>
+     </div>
+     <div class="clear"></div>
+     <div class="widget">
+diff --git a/tuskar_ui/infrastructure/static/infrastructure/less/horizon_upgrades.less b/tuskar_ui/infrastructure/static/infrastructure/less/horizon_upgrades.less
+new file mode 100644
+index 0000000..11c3513
+--- /dev/null
++++ b/tuskar_ui/infrastructure/static/infrastructure/less/horizon_upgrades.less
+@@ -0,0 +1,223 @@
++// general
++h2 {
++  font-weight: 200;
++  font-size: 24px;
++  color: rgb(80, 80, 80);
++  line-height: 130%;
++}
++
++h3 {
++  font-weight: lighter;
++  font-size: 20px;
++  color: rgb(80,80,80);
++  margin-bottom: 3px;
++  margin: 0 0 3px 0;
++}
++
++h4 {
++  font-weight: lighter;
++  font-size: 18px;
++  color: rgb(120,120,120);
++  margin-bottom: 3px;
++}
++
++h5 {
++  font-weight: lighter;
++  font-size: 16px;
++  color: rgb(120,120,120);
++  margin-bottom: 3px;
++}
++
++// topbar
++.topbar {
++  background: rgb(239, 239, 239);
++  padding: 0.5em 2em;
++  font-size: 90%;
++  height: 24px;
++  border-bottom: 1px solid rgb(220, 220, 220);
++}
++
++h1.brand a {
++  height: 24px;
++  width: 107px;
++  margin: 0 1em 0 0;
++  background-size: auto 24px;
++}
++
++.topbar .switcher_bar h3 {
++  line-height: 18px;
++  font-size: 11px !important;
++}
++
++#tenant_switcher {
++  display: none;
++}
++
++#user_info {
++  margin: 0;
++  padding: 0;
++  line-height: 24px;
++  font-size: 11px !important;
++
++  & > a {
++    font-size: 11px !important;
++  }
++}
++
++// sidebar
++.sidebar {
++  margin: 2.5em 2em;
++  border: 0 none;
++  background: none;
++}
++
++.nav_accordion {
++  background: none;
++
++  // dashboards
++  dt {
++    font-size: 90%;
++    color: rgb(170, 170, 170);
++    background-color: transparent;
++    border: 0 none;
++    border-bottom: 3px solid rgb(230, 230, 230);
++    padding: 0.2em 2em 0.2em 0;
++
++    &:not(:first-child) {
++      margin-top: 1em;
++    }
++
++    &.active {
++      color: rgb(120, 120, 120);
++      border-bottom: 3px solid rgb(130, 130, 130);
++    }
++
++    div {
++      font-size: inherit;
++      color: inherit;
++      font-weight: normal;
++      margin: 0;
++    }
++  }
++
++  // panel groups
++  dd {
++    margin: 0;
++
++    h4 {
++      margin: 0;
++      border: 1px solid rgb(210, 210, 210);
++      background-color: rgb(240, 240, 240);
++      color: rgb(140, 140, 140);
++      max-width: none;
++
++      div {
++        margin: 0 0 0 14px;
++      }
++
++      &.active {
++        border: 1px solid rgb(210, 210, 210);
++        background-color: rgb(230, 230, 230);
++        color: rgb(90, 90, 90);
++      }
++    }
++
++    // items
++    ul {
++      width: auto;
++      margin: 0 0 0 14px;
++
++      li a {
++        width: auto;
++        margin: 0;
++        border-bottom: 1px solid rgb(190, 190, 190);
++        border-left: 5px solid rgb(230, 230, 230);
++        color: rgb(90, 90, 90);
++        opacity: 0.8;
++
++        &:last-child {
++          margin: 0;
++        }
++
++        &.active {
++          color: rgb(215, 65, 50);
++          border-top: 0 none;
++          border-left: 5px solid rgb(215, 65, 50);
++          background-color: rgb(245, 245, 245);
++          margin: 0;
++          border-radius: 0;
++          opacity: 1;
++        }
++
++        &:hover {
++          background-color: rgb(245, 245, 245);
++          opacity: 1;
++        }
++      }
++    }
++  }
++}
++
++// content body
++#content_body {
++  padding-left: 300px;
++  padding-right: 35px;
++  padding-top: 2em;
++  padding-bottom: 3.5em;
++}
++
++.page-header {
++  margin-bottom: 0;
++  padding: 0;
++}
++
++// content nav
++#main_content {
++  .nav-tabs {
++    margin: 0 0 30px;
++    border: 0 none;
++
++    li a {
++      font-weight: 500;
++      position: relative;
++      top: -1px;
++      padding: 10px 15px;
++      border-radius: 0 0 4px 4px;
++      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
++      border-top-width: 0;
++      border-color: transparent;
++      color: #43A1D6;
++    }
++
++    li.active a {
++      border: 1px solid rgb(220, 220, 220);
++      background: #43A1D6;
++      color: white;
++      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
++
++      &:after {
++        color: inherit;
++      }
++    }
++
++    li:not(.active) a:hover {
++      border: 1px solid rgb(240, 240, 240);
++      border-top-width: 0;
++      background: rgb(244, 244, 244);
++    }
++  }
++
++  .tab-content {
++    padding: 0;
++    border: 0 none;
++  }
++
++  // content area
++  #content_body > .row-fluid {
++    margin: 0;
++  }
++
++  .widget:not(:last-child) {
++    margin: 0 0 2em 0;
++  }
++}
+diff --git a/tuskar_ui/infrastructure/static/infrastructure/less/individual_pages.less b/tuskar_ui/infrastructure/static/infrastructure/less/individual_pages.less
+index 9f49a67..9bc000e 100644
+--- a/tuskar_ui/infrastructure/static/infrastructure/less/individual_pages.less
++++ b/tuskar_ui/infrastructure/static/infrastructure/less/individual_pages.less
+@@ -18,26 +18,31 @@
+ .register-nodes-formset {
+   a.add-node-link {
+     display: block;
+-    margin-top: 6px;
+   }
++
+   .nav-tabs > .active > a {
+     color: @white;
+     background-color: @linkColor;
+   }
++
+   ul.nav-tabs > li span.delete-icon {
+     display: none;
+   }
++
+   ul.nav-tabs > li.active span.delete-icon {
+     display: block;
+     margin: 4px 19px 4px 0;
+     cursor: pointer;
+   }
++
+   ul.nav-tabs > li {
+     position: relative;
+   }
++
+   ul.nav-tabs > li.active {
+     width: 107%;
+   }
++
+   ul.nav-tabs > li.active:after {
+     display: block;
+     content: '';
+@@ -48,12 +53,16 @@
+     border-bottom: 16px solid transparent;
+     border-left: 8px solid @linkColor;
+   }
++
+   .register-nav-head {
+     margin-top: 19px;
++    margin-bottom: 5px;
+   }
+-  .form h4, .form h3 {
+-    margin-bottom: 16px;
++
++  .form h5 {
++    margin: 0.5em 0 0.75em 0;
+   }
++
+   .form label.checkbox {
+     font-weight: normal;
+   }
+diff --git a/tuskar_ui/infrastructure/static/infrastructure/less/infrastructure.less b/tuskar_ui/infrastructure/static/infrastructure/less/infrastructure.less
+index bd5ed04..0bbf3de 100644
+--- a/tuskar_ui/infrastructure/static/infrastructure/less/infrastructure.less
++++ b/tuskar_ui/infrastructure/static/infrastructure/less/infrastructure.less
+@@ -10,6 +10,7 @@
+ @import "index_pages.less";
+ @import "individual_pages.less";
+ @import "tables.less";
++@import "horizon_upgrades.less";
+ 
+ // disable text select on element
+ .unselectable {
+@@ -21,10 +22,9 @@
+ }
+ 
+ .actions {
+-    margin: 0 0  @baseLineHeight / 3 0;
+-}
+-.fullscreen-workflow-body {
+-    overflow: auto;
++    // not nice, but actions should be placed above the line
++    // will fix the style for now, better solution needed
++    margin: -33px 0 0 0;
+ }
+ 
+ // hide the project switcher from the top bar
+diff --git a/tuskar_ui/infrastructure/templates/formset_table/menu_formset.html b/tuskar_ui/infrastructure/templates/formset_table/menu_formset.html
+index 755805c..325ae6a 100644
+--- a/tuskar_ui/infrastructure/templates/formset_table/menu_formset.html
++++ b/tuskar_ui/infrastructure/templates/formset_table/menu_formset.html
+@@ -8,7 +8,7 @@
+     <div class="clearfix register-nav-head">
+       <a class="pull-right add-node-link"
+          href="#"><i class="icon-plus"></i> {% trans "Add Node" %}</a>
+-      <h3>Nodes to register</h3>
++      <h4>Nodes to register</h4>
+     </div>
+     <ul class="nav nav-tabs nav-stacked">
+       {% for form in formset %}
+diff --git a/tuskar_ui/infrastructure/templates/infrastructure/_fullscreen_workflow.html b/tuskar_ui/infrastructure/templates/infrastructure/_fullscreen_workflow.html
+index 83ac08c..9ac2025 100644
+--- a/tuskar_ui/infrastructure/templates/infrastructure/_fullscreen_workflow.html
++++ b/tuskar_ui/infrastructure/templates/infrastructure/_fullscreen_workflow.html
+@@ -1,7 +1,7 @@
+ {% load i18n %}
+ {% with workflow.get_entry_point as entry_point %}
+ <div class="row-fluid">
+-  <form class="form form-horizontal" {{ workflow.attr_string|safe }} action="{{ workflow.get_absolute_url }}" {% if add_to_field %}data-add-to-field="{{ add_to_field }}"{% endif %} method="POST"{% if workflow.multipart %} enctype="multipart/form-data"{% endif %}>
++  <form class="form form-horizontal span12" {{ workflow.attr_string|safe }} action="{{ workflow.get_absolute_url }}" {% if add_to_field %}data-add-to-field="{{ add_to_field }}"{% endif %} method="POST"{% if workflow.multipart %} enctype="multipart/form-data"{% endif %}>
+     {% csrf_token %}
+     {% if REDIRECT_URL %}<input type="hidden" name="{{ workflow.redirect_param_name }}" value="{{ REDIRECT_URL }}"/>{% endif %}
+     <div class="fullscreen-workflow-body">
+-- 
+1.8.1.4
+
