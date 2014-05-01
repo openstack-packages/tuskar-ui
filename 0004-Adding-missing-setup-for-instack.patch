@@ -1,7 +1,7 @@
-From a758de119652839b37aaf70ff92c7e1b1a9591b3 Mon Sep 17 00:00:00 2001
+From 6770789ee90d50211ab8dda7f39902e4b87beaf8 Mon Sep 17 00:00:00 2001
 From: Ladislav Smola <lsmola@redhat.com>
 Date: Tue, 29 Apr 2014 17:27:11 +0200
-Subject: [PATCH 3/3] Adding missing setup for instack
+Subject: [PATCH 2/2] Adding missing setup for instack
 
 -adding setup of neutron and workaround for flavors
 
@@ -11,10 +11,10 @@ Change-Id: I59fc22b60938ad9f548cab2990ca9f1f45d8a1f7
  1 file changed, 27 insertions(+), 2 deletions(-)
 
 diff --git a/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html b/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html
-index e87f5c6..990fa6e 100644
+index 7957972..90151e2 100644
 --- a/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html
 +++ b/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html
-@@ -118,11 +118,17 @@
+@@ -109,11 +109,17 @@
    # You need to run the following commands from a Undercloud node where you have
    # direct access via SSH to your Overcloud control node ({{overcloud.keystone_ip}}).
  
@@ -34,7 +34,7 @@ index e87f5c6..990fa6e 100644
    export OVERCLOUD_ADMIN_TOKEN={{overcloud.attributes.AdminToken}}
    export OVERCLOUD_ADMIN_PASSWORD={{overcloud.attributes.AdminPassword}}
    export OVERCLOUD_CINDER_PASSWORD={{overcloud.attributes.CinderPassword}}
-@@ -132,6 +138,18 @@
+@@ -123,6 +129,18 @@
    export OVERCLOUD_NOVA_PASSWORD={{overcloud.attributes.NovaPassword}}
    export OVERCLOUD_SWIFT_PASSWORD={{overcloud.attributes.SwiftPassword}}
    export OVERCLOUD_SWIFT_HASH={{overcloud.attributes.SwiftHashSuffix}}
@@ -53,7 +53,7 @@ index e87f5c6..990fa6e 100644
  
    source /etc/tripleo/overcloudrc
  
-@@ -145,6 +163,13 @@
+@@ -136,6 +154,13 @@
        --swift-password $OVERCLOUD_SWIFT_PASSWORD \
        --enable-horizon
    keystone role-create --name heat_stack_user
