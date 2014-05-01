@@ -1,6 +1,6 @@
 Name:	      openstack-tuskar-ui
 Version:	  0.1.0
-Release:	  11%{?dist}
+Release:	  12%{?dist}
 Summary:	  The UI component for Tuskar
 
 Group:		  Applications/System
@@ -11,6 +11,8 @@ Source0:	  https://pypi.python.org/packages/source/t/tuskar-ui/tuskar-ui-%{versi
 Patch0:     0001-Fixing-manifest.in.patch
 Patch1:     0003-Init-code-for-Instack-Undercloud.patch
 Patch2:     0004-Adding-missing-setup-for-instack.patch
+Patch3:     0005-Default-GlanceLogFile-template-parameter-value.patch
+Patch4:     0006-Import-keystoneclient.apiclient.exceptions.patch
 
 BuildArch:     noarch
 
@@ -71,6 +73,8 @@ deployments. It is a plugin for OpenStack Horizon.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
 rm -rf tuskar_ui.egg-info/
 
 # Remove the requirements file so that pbr hooks don't add it
@@ -121,6 +125,9 @@ export PYTHONPATH=$PYTHONPATH:%{_datadir}/openstack-dashboard
 %endif
 
 %changelog
+* Thu May 01 2014 Jordan OMara <jomara@redhat.com> - 0.1.0-12
+- Glance logfile & keystone api import fix (jomara@redhat.com)
+
 * Wed Apr 30 2014 Jordan OMara <jomara@redhat.com> - 0.1.0-11
 - Upstream instack comment patches
 

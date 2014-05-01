@@ -1,0 +1,30 @@
+From a3f179af6ca44bdf4f8193ca3cccf3599658c5bc Mon Sep 17 00:00:00 2001
+From: Tzu-Mainn Chen <tzumainn@redhat.com>
+Date: Tue, 29 Apr 2014 21:03:25 +0200
+Subject: [PATCH] Import keystoneclient.apiclient.exceptions
+
+Since keystoneclient doesn't automatically import its submodules,
+to use keystoneclient.apiclient.exceptions we have to import it
+explicitly.
+
+Change-Id: Idb0bce113c025c68898b21d30999dac222c7afa1
+---
+ tuskar_ui/api.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tuskar_ui/api.py b/tuskar_ui/api.py
+index db80595..e2c47bd 100644
+--- a/tuskar_ui/api.py
++++ b/tuskar_ui/api.py
+@@ -11,7 +11,7 @@
+ #    under the License.
+ import django.conf
+ import heatclient
+-import keystoneclient
++import keystoneclient.apiclient.exceptions
+ import logging
+ import urlparse
+ 
+-- 
+1.8.1.4
+
