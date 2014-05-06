@@ -1,6 +1,6 @@
 Name:	      openstack-tuskar-ui
 Version:	  0.1.0
-Release:	  13%{?dist}
+Release:	  14%{?dist}
 Summary:	  The UI component for Tuskar
 
 Group:		  Applications/System
@@ -125,6 +125,9 @@ export PYTHONPATH=$PYTHONPATH:%{_datadir}/openstack-dashboard
 %endif
 
 %changelog
+* Tue May 06 2014 Jordan OMara <jomara@redhat.com> - 0.1.0-14
+- updated upstream patch w/ fixed escaping (jomara@redhat.com)
+
 * Thu May 01 2014 Jordan OMara <jomara@redhat.com> - 0.1.0-13
 - less confused patches from upstream (jomara@redhat.com)
 
