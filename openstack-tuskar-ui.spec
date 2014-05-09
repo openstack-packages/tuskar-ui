@@ -1,6 +1,6 @@
 Name:	      openstack-tuskar-ui
 Version:	  0.1.0
-Release:	  15%{?dist}
+Release:	  16%{?dist}
 Summary:	  The UI component for Tuskar
 
 Group:		  Applications/System

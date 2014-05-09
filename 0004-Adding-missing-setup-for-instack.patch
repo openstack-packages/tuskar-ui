@@ -1,21 +1,33 @@
-From f74abe4a2ec0bdc7dce13a992b5938341b96fcb6 Mon Sep 17 00:00:00 2001
+From 2225144b7b82216242194a083022c3b81d65710f Mon Sep 17 00:00:00 2001
 From: Ladislav Smola <lsmola@redhat.com>
 Date: Tue, 29 Apr 2014 17:27:11 +0200
 Subject: [PATCH] Adding missing setup for instack
 
--adding setup of neutron and workaround for flavors.
-also removed whitespace
+- adding setup of neutron and workaround for flavors.
+- removed extraneous whitespace
+- clarified instructions for copying into script
 
 Change-Id: I59fc22b60938ad9f548cab2990ca9f1f45d8a1f7
 ---
- .../templates/overcloud/_detail_overview.html      | 163 ++++++++++++---------
- 1 file changed, 94 insertions(+), 69 deletions(-)
+ .../templates/overcloud/_detail_overview.html      | 177 ++++++++++++---------
+ 1 file changed, 105 insertions(+), 72 deletions(-)
 
 diff --git a/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html b/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html
-index 7957972..18686ac 100644
+index 7957972..31cb4a5 100644
 --- a/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html
 +++ b/tuskar_ui/infrastructure/overcloud/templates/overcloud/_detail_overview.html
-@@ -58,45 +58,45 @@
+@@ -49,93 +49,126 @@
+ <div class="row-fluid">
+   <div class="span8">
+     {% blocktrans %}
+-      Your cloud is now deployed; however, it needs to be initialized.
++      Your cloud is now deployed; however, it needs to be initialized.  To do so, copy the appropriate script into a file, make it executable, and run it.
+     {% endblocktrans %}
+     <ul>
+       <li>
+         {% blocktrans %}
+-          For <strong>Devtest</strong> users you can <a data-toggle="collapse" data-target="#devtest">see instructions here</a>.
++          <a data-toggle="collapse" data-target="#devtest"><strong>Devtest</strong> cloud initialization script</a>
          {% endblocktrans %}
          <div id="devtest" class="collapse">
            <pre>
@@ -58,8 +70,12 @@ index 7957972..18686ac 100644
 -      --enable-horizon \
 -      ${SSLBASE:+--ssl $PUBLIC_API_URL}
 -  keystone role-create --name heat_stack_user
++#!/usr/bin/bash
++
 +# You need to run the following commands from a machine where you have a checkout of the tripleo source code
 +# and direct access via SSH to your Overcloud control node ({{overcloud.keystone_ip}}).
++
++set -eux
 +
 +export TRIPLEO_ROOT=~/tripleo
 +cd $TRIPLEO_ROOT
@@ -100,7 +116,10 @@ index 7957972..18686ac 100644
            </pre>
          </div>
        </li>
-@@ -106,36 +106,61 @@
+       <li>
+         {% blocktrans %}
+-          For <strong>Instack</strong> users you can <a data-toggle="collapse" data-target="#instack">see instructions here</a>.
++          <a data-toggle="collapse" data-target="#instack"><strong>Instack</strong> cloud initialization script</a>
          {% endblocktrans %}
          <div id="instack" class="collapse">
            <pre>
@@ -134,6 +153,10 @@ index 7957972..18686ac 100644
 -      --swift-password $OVERCLOUD_SWIFT_PASSWORD \
 -      --enable-horizon
 -  keystone role-create --name heat_stack_user
++#!/usr/bin/bash
++
++set -eux
++
 +# You need to run the following commands from a Undercloud node where you have
 +# direct access via SSH to your Overcloud control node ({{overcloud.keystone_ip}}).
 +
