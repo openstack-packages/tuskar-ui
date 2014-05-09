@@ -1,6 +1,6 @@
 Name:	      openstack-tuskar-ui
 Version:	  0.1.0
-Release:	  14%{?dist}
+Release:	  15%{?dist}
 Summary:	  The UI component for Tuskar
 
 Group:		  Applications/System
@@ -13,6 +13,7 @@ Patch1:     0003-Init-code-for-Instack-Undercloud.patch
 Patch2:     0004-Adding-missing-setup-for-instack.patch
 Patch3:     0005-Default-GlanceLogFile-template-parameter-value.patch
 Patch4:     0006-Import-keystoneclient.apiclient.exceptions.patch
+Patch5:     0007-Ensure-ipmi-username-and-password-are-set.patch
 
 BuildArch:     noarch
 
@@ -75,6 +76,7 @@ deployments. It is a plugin for OpenStack Horizon.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 rm -rf tuskar_ui.egg-info/
 
 # Remove the requirements file so that pbr hooks don't add it
@@ -125,6 +127,9 @@ export PYTHONPATH=$PYTHONPATH:%{_datadir}/openstack-dashboard
 %endif
 
 %changelog
+* Fri May 09 2014 Jordan OMara <jomara@redhat.com> - 0.1.0-15
+- IPMI form patch (jomara@redhat.com)
+
 * Tue May 06 2014 Jordan OMara <jomara@redhat.com> - 0.1.0-14
 - updated upstream patch w/ fixed escaping (jomara@redhat.com)
 
