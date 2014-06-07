@@ -1,6 +1,6 @@
 Name:	      openstack-tuskar-ui
 Version:	  0.1.0
-Release:	  16%{?dist}
+Release:	  17%{?dist}
 Summary:	  The UI component for Tuskar
 
 Group:		  Applications/System
@@ -127,6 +127,9 @@ export PYTHONPATH=$PYTHONPATH:%{_datadir}/openstack-dashboard
 %endif
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.1.0-17
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Fri May 09 2014 Jordan OMara <jomara@redhat.com> - 0.1.0-15
 - IPMI form patch (jomara@redhat.com)
 
