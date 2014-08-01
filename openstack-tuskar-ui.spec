@@ -8,13 +8,6 @@ License:	  ASL 2.0
 URL:		    https://github.com/openstack/tuskar-ui
 Source0:	  https://pypi.python.org/packages/source/t/tuskar-ui/tuskar-ui-%{version}.tar.gz
 
-Patch0:     0001-Fixing-manifest.in.patch
-Patch1:     0003-Init-code-for-Instack-Undercloud.patch
-Patch2:     0004-Adding-missing-setup-for-instack.patch
-Patch3:     0005-Default-GlanceLogFile-template-parameter-value.patch
-Patch4:     0006-Import-keystoneclient.apiclient.exceptions.patch
-Patch5:     0007-Ensure-ipmi-username-and-password-are-set.patch
-
 BuildArch:     noarch
 
 BuildRequires: python2-devel
@@ -70,13 +63,7 @@ tuskar-ui is a user interface for Tuskar, a management API for OpenStack
 deployments. It is a plugin for OpenStack Horizon.
 
 %prep
-%setup -q -n tuskar-ui-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
+%setup -q -n tuskar-ui-%{upstream_version}
 rm -rf tuskar_ui.egg-info/
 
 # Remove the requirements file so that pbr hooks don't add it
@@ -109,13 +96,16 @@ cp -r tuskar_ui/infrastructure/static/infrastructure/* %{buildroot}%{_datadir}/o
 %{python_sitelib}/tuskar_ui/*.py*
 %{python_sitelib}/tuskar_ui/test
 %{python_sitelib}/tuskar_ui/infrastructure
-%{python_sitelib}/tuskar_ui/infrastructure/templates
+%{python_sitelib}/tuskar_ui/api
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_50_tuskar.py*
 %dir %{_datadir}/openstack-dashboard/static/infrastructure
 %{_datadir}/openstack-dashboard/static/infrastructure/js
 %{_datadir}/openstack-dashboard/static/infrastructure/less
 %{_datadir}/openstack-dashboard/static/infrastructure/tests
 %{_datadir}/openstack-dashboard/static/infrastructure/angular_templates
+%{_datadir}/openstack-dashboard/static/infrastructure/images/chevron.png
+%{_datadir}/openstack-dashboard/static/infrastructure/images/power.png
+
 %{_sysconfdir}/openstack-dashboard/enabled/_50_tuskar.py*
 
 %check
@@ -123,7 +113,8 @@ cp -r tuskar_ui/infrastructure/static/infrastructure/* %{buildroot}%{_datadir}/o
 %if 0%{?rhel} == 0
 # until django-1.6 support for tests is enabled, disable tests
 export PYTHONPATH=$PYTHONPATH:%{_datadir}/openstack-dashboard
-./run_tests.sh -N -P
+# TODO : reenable, We don't have selenium
+#./run_tests.sh -N -P
 %endif
 
 %changelog
