@@ -97,10 +97,11 @@ cp -r tuskar_ui/infrastructure/static/infrastructure/* %{buildroot}%{_datadir}/o
 %{python_sitelib}/tuskar_ui/test
 %{python_sitelib}/tuskar_ui/infrastructure
 %{python_sitelib}/tuskar_ui/api
+%{python_sitelib}/tuskar_ui/utils
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_50_tuskar.py*
 %dir %{_datadir}/openstack-dashboard/static/infrastructure
 %{_datadir}/openstack-dashboard/static/infrastructure/js
-%{_datadir}/openstack-dashboard/static/infrastructure/less
+%{_datadir}/openstack-dashboard/static/infrastructure/scss
 %{_datadir}/openstack-dashboard/static/infrastructure/tests
 %{_datadir}/openstack-dashboard/static/infrastructure/angular_templates
 %{_datadir}/openstack-dashboard/static/infrastructure/images/chevron.png
@@ -118,6 +119,10 @@ export PYTHONPATH=$PYTHONPATH:%{_datadir}/openstack-dashboard
 %endif
 
 %changelog
+* Tue Aug 12 2014 Derek Higgins <derekh@redhat.com> - XXX
+- Remove infrastructure/less from %files
+- Add tuskar_ui/utils and infrastructure/scss to %files
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.1.0-17
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
