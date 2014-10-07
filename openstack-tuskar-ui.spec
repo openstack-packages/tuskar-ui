@@ -103,7 +103,6 @@ cp -r tuskar_ui/infrastructure/static/infrastructure/* %{buildroot}%{_datadir}/o
 %{_datadir}/openstack-dashboard/static/infrastructure/js
 %{_datadir}/openstack-dashboard/static/infrastructure/scss
 %{_datadir}/openstack-dashboard/static/infrastructure/tests
-%{_datadir}/openstack-dashboard/static/infrastructure/angular_templates
 %{_datadir}/openstack-dashboard/static/infrastructure/images/chevron.png
 %{_datadir}/openstack-dashboard/static/infrastructure/images/power.png
 
@@ -119,6 +118,9 @@ export PYTHONPATH=$PYTHONPATH:%{_datadir}/openstack-dashboard
 %endif
 
 %changelog
+* Tue Oct 07 2014 Dan Prince <dprince@redhat.com> - XXX
+- Remove angular_templates (no longer exists)
+
 * Tue Aug 12 2014 Derek Higgins <derekh@redhat.com> - XXX
 - Remove infrastructure/less from %files
 - Add tuskar_ui/utils and infrastructure/scss to %files
