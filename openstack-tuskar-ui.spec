@@ -1,14 +1,13 @@
 %global homedir %{_datadir}/tuskar
 
-Name:	      openstack-tuskar-ui
+Name:         openstack-tuskar-ui
 Version:      XXX
-Release:      XXX{?dist}
-Summary:	  The UI component for Tuskar
+Release:      XXX
+Summary:      The UI component for Tuskar
 
-Group:		  Applications/System
-License:	  ASL 2.0
-URL:		    https://github.com/openstack/tuskar-ui
-Source0:	  https://pypi.python.org/packages/source/t/tuskar-ui/tuskar-ui-%{version}.tar.gz
+License:      ASL 2.0
+URL:          https://github.com/openstack/tuskar-ui
+Source0:      https://pypi.python.org/packages/source/t/tuskar-ui/tuskar-ui-%{version}.tar.gz
 
 BuildArch:     noarch
 
@@ -113,20 +112,20 @@ ln -s %{_sysconfdir}/openstack-dashboard/enabled/_50_tuskar.py %{buildroot}%{_da
 # post install { python manage.py compress }
 mkdir -p  %{buildroot}%{_datadir}/openstack-dashboard/static/infrastructure
 cp -r tuskar_ui/infrastructure/static/infrastructure/* %{buildroot}%{_datadir}/openstack-dashboard/static/infrastructure/
-mkdir -p  %{buildroot}%{python_sitelib}/tuskar_ui/static/infrastructure
-cp -r tuskar_ui/infrastructure/static/infrastructure/* %{buildroot}%{python_sitelib}/tuskar_ui/infrastructure/static/infrastructure/
+mkdir -p  %{buildroot}%{python2_sitelib}/tuskar_ui/static/infrastructure
+cp -r tuskar_ui/infrastructure/static/infrastructure/* %{buildroot}%{python2_sitelib}/tuskar_ui/infrastructure/static/infrastructure/
 
 %files
 %doc LICENSE README.rst
-%dir %{python_sitelib}/tuskar_ui
-%{python_sitelib}/*.egg-info
-%{python_sitelib}/tuskar_ui/*.py*
-%{python_sitelib}/tuskar_ui/test
-%{python_sitelib}/tuskar_ui/infrastructure
-%{python_sitelib}/tuskar_ui/static
-%{python_sitelib}/tuskar_ui/utils
-%{python_sitelib}/tuskar_ui/api
-%{python_sitelib}/tuskar_ui/infrastructure/templates
+%dir %{python2_sitelib}/tuskar_ui
+%{python2_sitelib}/*.egg-info
+%{python2_sitelib}/tuskar_ui/*.py*
+%{python2_sitelib}/tuskar_ui/test
+%{python2_sitelib}/tuskar_ui/infrastructure
+%{python2_sitelib}/tuskar_ui/static
+%{python2_sitelib}/tuskar_ui/utils
+%{python2_sitelib}/tuskar_ui/api
+%{python2_sitelib}/tuskar_ui/infrastructure/templates
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_10_admin.py*
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_20_project.py*
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_30_identity.py*
