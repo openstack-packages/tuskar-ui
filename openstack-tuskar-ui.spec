@@ -115,6 +115,11 @@ cp -r tuskar_ui/infrastructure/static/infrastructure/* %{buildroot}%{_datadir}/o
 mkdir -p  %{buildroot}%{python2_sitelib}/tuskar_ui/static/infrastructure
 cp -r tuskar_ui/infrastructure/static/infrastructure/* %{buildroot}%{python2_sitelib}/tuskar_ui/infrastructure/static/infrastructure/
 
+# Delete tests
+rm -fr %{buildroot}%{python_sitelib}/tuskar_ui/infrastructure/*/tests.py*
+rm -fr %{buildroot}%{python_sitelib}/tuskar_ui/test
+rm -fr %{buildroot}%{python_sitelib}/tuskar_ui/utils/tests.py*
+
 %files
 %doc LICENSE README.rst
 %dir %{python2_sitelib}/tuskar_ui
